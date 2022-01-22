@@ -1,4 +1,4 @@
-def caesar_cipher(string, shift)
+def shift_letter(string, shift)
   alphabet = ('a'..'z').to_a
   index = alphabet.index(string.downcase)
 
@@ -27,6 +27,15 @@ def caesar_cipher(string, shift)
   alphabet[index+shift]
 end
 
+def caesar_cipher(string, shift)
+  shifted_word = ""
+
+  string.each_char do |c|
+    shifted_word << shift_letter(c, shift)
+  end
+  shifted_word
+end
+
 # tests
 p caesar_cipher("a", 1) # => b
 p caesar_cipher("A", 1) # => B
@@ -34,7 +43,7 @@ p caesar_cipher("z", 5) # => e
 p caesar_cipher("y", 5) # => d
 p caesar_cipher("Z", 5) # => E
 p caesar_cipher("Y", 5) # => D
-# p caesar_cipher("abc", 1) # => bcd
+p caesar_cipher("abc", 1) # => bcd
 # p caesar_cipher("ABC", 1) # => BCD
 # p caesar_cipher("!abc", 1) # => !bcd
 # p caesar_cipher("!ABC", 1) # => !BCD
