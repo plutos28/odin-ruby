@@ -1,7 +1,7 @@
 def shift_letter(string, shift)
   alphabet = ('a'..'z').to_a
 
-  # early exit when its a symbol(?, !, $)
+  # early exit when its not in alphabet(?, !, $, ' ')
   unless alphabet.include?(string.downcase) # check downcase because uppercase letters pass this condition and return
     return string
   end
@@ -13,11 +13,6 @@ def shift_letter(string, shift)
 
   # keep track of distance to end to decide whether to start over in array
   distance_to_end = (alphabet.length-1) - (index)
-
-  # when we're at z, wrap index to before start(as index 0 is counted)
-  if distance_to_end.zero?
-    index = -1
-  end
 
   # if we need to wrap, change shift value(I think this may become a recursive function in the future)
   if (index+shift) > (alphabet.length-1)
@@ -53,8 +48,8 @@ p caesar_cipher("abc", 1) # => bcd
 p caesar_cipher("ABC", 1) # => BCD
 p caesar_cipher("!abc", 1) # => !bcd
 p caesar_cipher("!ABC", 1) # => !BCD
-# p caesar_cipher("abc def!$", 2) # => cde fgh!$ 
-# p caesar_cipher("ABC DEF!$", 2) # => CDE FGH!$ 
-# p caesar_cipher("def", 5) # => igk
-# p caesar_cipher("What a string!", 5) #  => "Bmfy f xywnsl!"
+p caesar_cipher("abc def!$", 2) # => cde fgh!$ 
+p caesar_cipher("ABC DEF!$", 2) # => CDE FGH!$ 
+p caesar_cipher("def", 5) # => igk
+p caesar_cipher("What a string!", 5) #  => "Bmfy f xywnsl!"
 
