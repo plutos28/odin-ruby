@@ -1,20 +1,30 @@
 def caesar_cipher(string, shift)
   alphabet = ('a'..'z').to_a
+  index = alphabet.index(string.downcase)
 
   # keep track capitalization so we know whether to capitalize string later
   capitalized = (string == string.upcase)
 
+  # keep track of distance to end to decide whether to start over in array
+  distance_to_end = (alphabet.length-1) - (index)
+
+  # when we're at z, wrap index to before start(as index 0 is counted)
+  if distance_to_end.zero?
+    index = -1
+  end
+  
   if capitalized
-    return alphabet[alphabet.index(string.downcase)+shift].upcase
+    return alphabet[index+shift].upcase
   end
 
-  alphabet[alphabet.index(string.downcase)+shift]
+  alphabet[index+shift]
 end
 
 # tests
 p caesar_cipher("a", 1) # => b
 p caesar_cipher("A", 1) # => B
-# p caesar_cipher("z", 5) # => e
+p caesar_cipher("z", 5) # => e
+# p caesar_cipher("y", 5) # => d
 # p caesar_cipher("Z", 5) # => E
 # p caesar_cipher("abc", 1) # => bcd
 # p caesar_cipher("ABC", 1) # => BCD
