@@ -1,12 +1,19 @@
 def caesar_cipher(string, shift)
   alphabet = ('a'..'z').to_a
 
-  alphabet[alphabet.index(string)+shift]
+  # keep track capitalization so we know whether to capitalize string later
+  capitalized = (string == string.upcase)
+
+  if capitalized
+    return alphabet[alphabet.index(string.downcase)+shift].upcase
+  end
+
+  alphabet[alphabet.index(string.downcase)+shift]
 end
 
 # tests
 p caesar_cipher("a", 1) # => b
-# p caesar_cipher("A", 1) # => B
+p caesar_cipher("A", 1) # => B
 # p caesar_cipher("z", 5) # => e
 # p caesar_cipher("Z", 5) # => E
 # p caesar_cipher("abc", 1) # => bcd
