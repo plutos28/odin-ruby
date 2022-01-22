@@ -1,5 +1,11 @@
 def shift_letter(string, shift)
   alphabet = ('a'..'z').to_a
+
+  # early exit when its a symbol(?, !, $)
+  unless alphabet.include?(string.downcase) # check downcase because uppercase letters pass this condition and return
+    return string
+  end
+
   index = alphabet.index(string.downcase)
 
   # keep track capitalization so we know whether to capitalize string later
@@ -45,8 +51,8 @@ p caesar_cipher("Z", 5) # => E
 p caesar_cipher("Y", 5) # => D
 p caesar_cipher("abc", 1) # => bcd
 p caesar_cipher("ABC", 1) # => BCD
-# p caesar_cipher("!abc", 1) # => !bcd
-# p caesar_cipher("!ABC", 1) # => !BCD
+p caesar_cipher("!abc", 1) # => !bcd
+p caesar_cipher("!ABC", 1) # => !BCD
 # p caesar_cipher("abc def!$", 2) # => cde fgh!$ 
 # p caesar_cipher("ABC DEF!$", 2) # => CDE FGH!$ 
 # p caesar_cipher("def", 5) # => igk
