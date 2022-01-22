@@ -12,7 +12,14 @@ def caesar_cipher(string, shift)
   if distance_to_end.zero?
     index = -1
   end
-  
+
+  # if we need to wrap, change shift value(I think this may become a recursive function in the future)
+  if (index+shift) > (alphabet.length-1)
+    # we want to wrap
+    shift -= distance_to_end
+    index = -1
+  end
+
   if capitalized
     return alphabet[index+shift].upcase
   end
@@ -24,8 +31,9 @@ end
 p caesar_cipher("a", 1) # => b
 p caesar_cipher("A", 1) # => B
 p caesar_cipher("z", 5) # => e
-# p caesar_cipher("y", 5) # => d
+p caesar_cipher("y", 5) # => d
 # p caesar_cipher("Z", 5) # => E
+# p caesar_cipher("Y", 5) # => D
 # p caesar_cipher("abc", 1) # => bcd
 # p caesar_cipher("ABC", 1) # => BCD
 # p caesar_cipher("!abc", 1) # => !bcd
