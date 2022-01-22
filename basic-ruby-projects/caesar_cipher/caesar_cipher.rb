@@ -1,31 +1,19 @@
-def shift_letter(string, shift)
+def shift_letter(letter, shift)
   alphabet = ('a'..'z').to_a
 
-  # early exit when its not in alphabet(?, !, $, ' ')
-  unless alphabet.include?(string.downcase) # check downcase because uppercase letters pass this condition and return
-    return string
+   # early exit when its not in alphabet(?, !, $, ' ')
+  unless alphabet.include?(letter.downcase) # check downcase because uppercase letters are not in alphabet
+    return letter
   end
 
-  index = alphabet.index(string.downcase)
+  index = alphabet.index(letter.downcase)
+  is_capitalized = (letter == letter.upcase)
+  shifted_index = (index+shift) % 26
 
-  # keep track capitalization so we know whether to capitalize string later
-  capitalized = (string == string.upcase)
-
-  # keep track of distance to end to decide whether to start over in array
-  distance_to_end = (alphabet.length-1) - (index)
-
-  # if we need to wrap, change shift value(I think this may become a recursive function in the future)
-  if (index+shift) > (alphabet.length-1)
-    # we want to wrap
-    shift -= distance_to_end
-    index = -1
+  if is_capitalized
+    return alphabet[shifted_index].upcase
   end
-
-  if capitalized
-    return alphabet[index+shift].upcase
-  end
-
-  alphabet[index+shift]
+  alphabet[shifted_index]
 end
 
 def caesar_cipher(string, shift)
@@ -52,4 +40,5 @@ p caesar_cipher("abc def!$", 2) # => cde fgh!$
 p caesar_cipher("ABC DEF!$", 2) # => CDE FGH!$ 
 p caesar_cipher("def", 5) # => igk
 p caesar_cipher("What a string!", 5) #  => "Bmfy f xywnsl!"
+p caesar_cipher("ABCDEF", -3) #  => "XYZABC"
 
