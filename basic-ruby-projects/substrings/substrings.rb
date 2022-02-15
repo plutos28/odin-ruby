@@ -1,3 +1,14 @@
+def count_to_hash(words)
+  words.reduce({}) do |final_hash, word| 
+    unless final_hash[word]
+      final_hash[word] = 0
+    end
+
+    final_hash[word] += 1
+    final_hash 
+  end
+end
+
 def substrings(string, dictionary)
   result = [] 
   string = string.split
@@ -9,14 +20,13 @@ def substrings(string, dictionary)
       end 
     end
   end
-
-  result
+ count_to_hash(result) 
 end
 
 dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
-p substrings("below", dictionary) #=> ["below", "low"]
-p substrings("howdy how", dictionary) #=> ["how", "how", "howdy"]
-p substrings("sit it", dictionary) #=> ["it", "it", "i", "i", "sit"]
+p substrings("below", dictionary) #=> { "below" => 1, "low" => 1 }
+p substrings("howdy how", dictionary) #=> { "how" => 2, "howdy" => 1 }
+p substrings("sit it", dictionary) #=> { "it" => 2, "i" => 2, "sit" => 1 }
 
 #p substrings("below", dictionary) 
 # => { "below" => 1, "low" => 1 }
