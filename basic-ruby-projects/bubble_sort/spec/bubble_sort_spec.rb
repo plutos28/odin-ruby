@@ -3,7 +3,13 @@ require_relative '../bubble_sort.rb'
 RSpec.describe "Bubble Sort" do
 
   describe "sorts with worst case being n-1" do
-    it "sorts an array of 2 elements" do
+    it "bubbles up 5 in array [5, 1, 4, 2, 8]" do
+      n = [5, 1, 4, 2, 8]
+
+      expect(bubble_sort(n)).to eq([1, 4, 2, 5, 8])
+    end
+
+    xit "sorts an array of 2 elements" do
       n = [2, 1]
 
       expect(bubble_sort(n)).to eq([1, 2])
